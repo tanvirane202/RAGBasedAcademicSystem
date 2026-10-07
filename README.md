@@ -1,5 +1,4 @@
 # RAGBasedAcademicSystem
-
 ## EduGenAI
 
 EduGenAI is an AI-powered academic assistant built using **Java, Spring Boot and Spring AI**.
@@ -309,6 +308,71 @@ version
 
 ---
 
+# How to Run
+
+1. Clone the repository and open the project in Eclipse or any Spring Boot IDE.
+
+2. Configure the required MySQL database details in `application.properties`.
+
+3. Configure the required Gemini and Groq API credentials.
+
+4. Configure the Qdrant connection details.
+
+5. Start the Spring Boot application.
+
+6. Check that the application is running on the configured port.
+
+7. Use Postman to test the APIs.
+
+Example:
+
+```text
+POST /auth/register
+POST /auth/login
+
+GET /embedding?text=DBMS
+
+GET /retrival/search?query=DBMS
+
+GET /chatbot/ask?question=What is DBMS
+
+POST /question-paper/generate
+```
+
+8. Upload academic documents through the document upload API.
+
+9. The uploaded documents are processed using Apache Tika, chunked, converted into embeddings and stored in Qdrant.
+
+10. After the documents are processed, use the chatbot API to ask questions from the uploaded study material.
+
+RAG execution flow:
+
+```text
+Upload Document
+      ↓
+Apache Tika
+      ↓
+Text Extraction
+      ↓
+Chunking
+      ↓
+Gemini Embeddings
+      ↓
+Qdrant
+      ↓
+Ask Question
+      ↓
+Similarity Search
+      ↓
+Retrieved Context
+      ↓
+Groq LLM
+      ↓
+Answer
+```
+
+---
+
 # Project Flow
 
 ```text
@@ -418,30 +482,7 @@ These documents can be processed and stored in Qdrant for testing retrieval and 
 
 ---
 
-# Project Status
-
-Implemented and tested:
-
-* Authentication and JWT security
-* User registration and login
-* Study Material Management
-* PDF/DOCX/PPTX processing
-* Text extraction using Apache Tika
-* Chunking
-* Gemini embeddings
-* Qdrant vector search
-* Basic RAG
-* Metadata-aware RAG
-* Grounded responses
-* No-answer handling
-* Conversation context
-* AI Question Paper Generator
-* Document upload, search and download
-* REST API testing using Postman
-
----
-
-## Main RAG Flow
+# Main RAG Flow
 
 ```text
 Academic Document
@@ -464,3 +505,4 @@ Groq LLM
        ↓
 Grounded Answer
 ```
+
